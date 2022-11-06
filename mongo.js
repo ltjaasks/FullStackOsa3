@@ -13,8 +13,8 @@ const url =
 mongoose.connect(url)
 
 const personSchema = new mongoose.Schema({
-    Name: String,
-    Number: String,
+    name: String,
+    number: String,
   })
   
   const Person = mongoose.model('Person', personSchema)
@@ -23,14 +23,14 @@ const personSchema = new mongoose.Schema({
     Person.find({}).then(result => {
         console.log('Phonebook:')
         result.forEach(person => {
-          console.log(person.Name, person.Number)
+          console.log(person.name, person.number)
         })
         mongoose.connection.close()
       })
   } else {
     const person = new Person({
-        Name: process.argv[3],
-        Number: process.argv[4],
+        name: process.argv[3],
+        number: process.argv[4],
       })
       
       person.save().then(result => {
