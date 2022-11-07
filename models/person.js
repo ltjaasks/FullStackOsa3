@@ -11,9 +11,19 @@ mongoose.connect(url)
         console.log('error connecting to MongoDB:', error.message)
     })
 
+
 const personSchema = new mongoose.Schema({
-    name: String,
-    number: String,
+    name: {
+        type: String,
+        minlength: 3
+    },
+    number: {
+        type: String,
+        minlength: 8,
+        validate: numero => {
+            return /^[0-9]{2}\-[0-9]{5,}$/.test(numero) || /^[0-9]{3}\-[0-9]{4,}$/.test(numero)
+        }
+    }
   })
 
 personSchema.set('toJSON', {
